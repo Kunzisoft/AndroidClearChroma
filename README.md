@@ -18,8 +18,7 @@
 
 Donations will be used to create free and open source applications.
 
-<script src="https://liberapay.com/Kunzisoft/widgets/button.js"></script>
-<noscript><a href="https://liberapay.com/Kunzisoft/donate"><img src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+<a href="https://liberapay.com/Kunzisoft/donate"><img src="https://liberapay.com/assets/widgets/donate.svg"></a>
 
 [![Alt attribute for your image](https://lh3.googleusercontent.com/d1aTMwN6NMJmcMdsz24h_J4JmH5aZ9lhbJdZWQ3VFne3VZxiUVPrYZ41qm1Zig2ha4lU4Wg_BSAE_w=w1920-h1200-no "")](https://youtube.streamlabs.com/UC_U4icXPFfgKo4IDSTSzBEQ "Kunzisoft Donation")
 
@@ -42,7 +41,7 @@ And add the dependency
 
 ## Usage
 
-### ChromaDialog
+### ChromaDialog
 
 To display a color picker `DialogFragment` from your Activity:
 ``` java
@@ -84,7 +83,9 @@ for complete sample of ChromaDialog
 ## Style
 
 <img src="https://raw.githubusercontent.com/Kunzisoft/AndroidClearChroma/master/art/screen4.png" width="505">
-For custom dialog, simply redefined following nodes :
+
+For custom dialog, simply redefined following nodes : 
+
 ```
 <style name="Chroma.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
 	<!-- Used for the buttons -->
@@ -193,7 +194,6 @@ See
 for complete sample.
 
 ## Bonus
----
 Method for formatted output of a given color:
 ```java
 ChromaUtil.getFormattedColorString(int color, boolean showAlpha);
@@ -201,7 +201,7 @@ ChromaUtil.getFormattedColorString(int color, boolean showAlpha);
 
 [Video](https://www.youtube.com/watch?v=zskKV6ifRfw) for create the sample icon (in French)
 
-This project is a fork of [VintageChroma by Pavel Sikun](https://github.com/MrBIMC/VintageChroma) no longer maintained.
+This project is a fork of [VintageChroma by Pavel Sikun](https://github.com/MrBIMC/VintageChroma).
 
 ## License
 Copyright 2017 JAMET Jeremy.
