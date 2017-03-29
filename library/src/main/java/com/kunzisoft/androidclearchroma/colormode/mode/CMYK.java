@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Pavel Sikun on 28.03.16.
+ * Class for managed Cyan-Magenta-Yellow-Black color mode <br />
+ * Each value of channel is between 0 and 100
+ * @author JJamet
  */
 public class CMYK implements AbstractColorMode {
 

@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import com.kunzisoft.androidclearchroma.listener.OnColorSelectedListener;
 
 /**
- * Created by joker on 19/02/17.
+ * An abstract class to make easier to use preferences through PreferencesFragmentCompat. <br >
+ * Assign automatically the color in preference with the button of dialog
+ * @author JJamet
  */
 public abstract class ChromaPreferenceFragmentCompat extends PreferenceFragmentCompat implements OnColorSelectedListener {
 

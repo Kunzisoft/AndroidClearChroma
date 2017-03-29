@@ -4,6 +4,7 @@ import android.support.annotation.ColorInt;
 
 /**
  * Callback listener for color changed
+ * @author JJamet
  */
 public interface OnColorChangedListener {
 

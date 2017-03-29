@@ -24,8 +24,8 @@ import android.util.Log;
 import com.kunzisoft.androidclearchroma.colormode.ColorMode;
 
 /**
- * Created by Pavel Sikun on 5.04.16.
- * Modified by Jeremy JAMET on 12/09/16.
+ * Compatibility DialogPreference class that handles preferences, selected color display, and dialog box for selecting this color.
+ * @author JJamet - Pavel Sikun
  */
 public class ChromaPreferenceCompat extends DialogPreference {
 
@@ -205,10 +205,11 @@ public class ChromaPreferenceCompat extends DialogPreference {
         return super.persistInt(value);
     }
 
-    @Override
     /**
+     * {@inheritDoc}
      * If [color] is present in summary, it's replaced by string of color
      */
+    @Override
     public void setSummary(CharSequence summary) {
         String summaryWithColor = null;
         if(summary != null) {
@@ -218,37 +219,69 @@ public class ChromaPreferenceCompat extends DialogPreference {
         super.setSummary(summaryWithColor);
     }
 
+    /**
+     * Get current color of preference
+     * @return IntColor
+     */
     public int getColor() {
         return color;
     }
 
+    /**
+     * Assign color of preference
+     * @param color IntColor
+     */
     public void setColor(@ColorInt int color) {
         persistInt(color);
         notifyChanged();
     }
 
+    /**
+     * Get current color mode
+     * @return ColorMode
+     */
     public ColorMode getColorMode() {
         return colorMode;
     }
 
+    /**
+     * Assign color mode
+     * @param colorMode ColorMode
+     */
     public void setColorMode(ColorMode colorMode) {
         this.colorMode = colorMode;
         notifyChanged();
     }
 
+    /**
+     * Get current indicator mode
+     * @return IndicatorMode
+     */
     public IndicatorMode getIndicatorMode() {
         return indicatorMode;
     }
 
+    /**
+     * Assign indicator mode
+     * @param indicatorMode IndicatorMode
+     */
     public void setIndicatorMode(IndicatorMode indicatorMode) {
         this.indicatorMode = indicatorMode;
         notifyChanged();
     }
 
+    /**
+     * Get shape of preview
+     * @return The shape for preview
+     */
     public ShapePreviewPreference getShapePreviewPreference() {
         return shapePreviewPreference;
     }
 
+    /**
+     * Defined a shape container for preview of color
+     * @param shapePreviewPreference Shape wanted for preview
+     */
     public void setShapePreviewPreference(ShapePreviewPreference shapePreviewPreference) {
         this.shapePreviewPreference = shapePreviewPreference;
         notifyChanged();

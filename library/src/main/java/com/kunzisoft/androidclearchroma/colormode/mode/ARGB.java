@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Pavel Sikun on 28.03.16.
+ * Class for managed Alpha-Red-Green-Blue color mode
+ * @author Pavel Sikun
  */
 public class ARGB implements AbstractColorMode {
 

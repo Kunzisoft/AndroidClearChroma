@@ -24,10 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO
- * Created by joker on 16/02/17.
+ * Fragment used to show color views. The chromaColorFragment displays each color channel according to the chosen mode.
+ * @author JJamet
  */
-
 public class ChromaColorFragment extends Fragment {
 
     private static final String TAG = "ChromaColorFragment";
@@ -42,6 +41,13 @@ public class ChromaColorFragment extends Fragment {
     private ColorMode colorMode;
     private IndicatorMode indicatorMode;
 
+    /**
+     * Must be used to create a new instance of the fragment.
+     * @param initialColor Color originally viewed
+     * @param colorMode Color mode use
+     * @param indicatorMode Indicator used
+     * @return New ChromaColorFragment
+     */
     public static ChromaColorFragment newInstance(@ColorInt int initialColor, ColorMode colorMode, IndicatorMode indicatorMode) {
         ChromaColorFragment chromaColorFragment = new ChromaColorFragment();
 
@@ -55,6 +61,11 @@ public class ChromaColorFragment extends Fragment {
         return chromaColorFragment;
     }
 
+    /**
+     * Must be used to create a new instance of the fragment.
+     * @param args Only arguments ARG_INITIAL_COLOR, ARG_COLOR_MODE and ARG_INDICATOR_MODE in bundle will be interpreted
+     * @return New ChromaColorFragment
+     */
     public static ChromaColorFragment newInstance(Bundle args) {
         ChromaColorFragment chromaColorFragment = new ChromaColorFragment();
         chromaColorFragment.setArguments(args);
@@ -156,14 +167,26 @@ public class ChromaColorFragment extends Fragment {
         assignArguments(args);
     }
 
+    /**
+     * Get current color selected with channels
+     * @return int: current color selected in fragment
+     */
     public int getCurrentColor() {
         return currentColor;
     }
 
+    /**
+     * Get color mode used
+     * @return ColorMode: color mode in fragment
+     */
     public ColorMode getColorMode() {
         return colorMode;
     }
 
+    /**
+     * Get indicator mode used
+     * @return IndicatorMode : indicator in fragment
+     */
     public IndicatorMode getIndicatorMode() {
         return indicatorMode;
     }

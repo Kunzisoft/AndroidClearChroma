@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Pavel Sikun on 01.04.16.
+ * Class for managed Hue-Saturation-Lightness color mode
+ * @author Pavel Sikun
  */
 public class HSL implements AbstractColorMode {
 
