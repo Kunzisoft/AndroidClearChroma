@@ -15,9 +15,8 @@ import com.kunzisoft.androidclearchroma.fragment.ChromaColorFragment;
 import com.kunzisoft.androidclearchroma.listener.OnColorChangedListener;
 
 /**
- * Created by joker on 05/02/17.
+ * An activity that simply displays the color fragment.
  */
-
 public class FragmentColorActivity extends AppCompatActivity implements OnColorChangedListener {
 
     private static final String TAG_COLOR_FRAGMENT = "TAG_COLOR_FRAGMENT";

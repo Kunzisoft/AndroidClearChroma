@@ -12,7 +12,8 @@ import com.kunzisoft.androidclearchroma.R;
 import com.kunzisoft.androidclearchroma.colormode.Channel;
 
 /**
- * Created by Pavel Sikun on 28.03.16.
+ * TODO Must be a fragment, isn't a normal view
+ * @author Pavel Sikun
  */
 public class ChannelView extends RelativeLayout {
 

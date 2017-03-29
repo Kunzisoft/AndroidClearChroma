@@ -1,7 +1,8 @@
 package com.kunzisoft.androidclearchroma.colormode;
 
 /**
- * Created by Pavel Sikun on 28.03.16.
+ * Channel for manipulate data of element in color mode
+ * @author Pavel Sikun
  */
 public final class Channel {
 
@@ -27,31 +28,65 @@ public final class Channel {
         this.progress = progress;
     }
 
-    public interface ColorExtractor {
-        int extract(int color);
-    }
-
+    /**
+     * Get resource id of channel <br />
+     * Used to name the channel of color mode.
+     * @return NameId
+     */
     public int getNameResourceId() {
         return nameResourceId;
     }
 
+    /**
+     * Return the minimum channel value.
+     * @return Minimum
+     */
     public int getMin() {
         return min;
     }
 
+    /**
+     * Return the maximum channel value.
+     * @return Maximum
+     */
     public int getMax() {
         return max;
     }
 
+    /**
+     * Get color extractor
+     * @return Extractor
+     */
     public ColorExtractor getExtractor() {
         return extractor;
     }
 
+    /**
+     * Get current progress of channel
+     * @return Current progress
+     */
     public int getProgress() {
         return progress;
     }
 
+    /**
+     * Assign current progress of channel
+     * @param progress Between minimum and maximum
+     */
     public void setProgress(int progress) {
         this.progress = progress;
+    }
+
+    /**
+     * Must be implemented for extract color in a color mode
+     */
+    public interface ColorExtractor {
+
+        /**
+         * Extract current color
+         * @param color Color to extracted
+         * @return IntColor
+         */
+        int extract(int color);
     }
 }

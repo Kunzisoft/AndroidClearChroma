@@ -24,6 +24,9 @@ import com.kunzisoft.androidclearchroma.colormode.ColorMode;
 import com.kunzisoft.androidclearchroma.listener.OnColorChangedListener;
 import com.kunzisoft.androidclearchroma.listener.OnColorSelectedListener;
 
+/**
+ * Main activity of sample project, contains buttons for show fragment, preferences and dialog
+ */
 public class MainActivity extends AppCompatActivity implements OnColorSelectedListener, OnColorChangedListener {
 
     private static final String EXTRA_COLOR = "EXTRA_COLOR";
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         fab.setBackgroundTintList(ColorStateList.valueOf(color));
         setupSpinner();
 
+        // Event for Floating Action Button
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
             }
         });
 
+        // Events for each button
         findViewById(R.id.buttonOpenView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

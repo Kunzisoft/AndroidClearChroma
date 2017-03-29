@@ -1,7 +1,8 @@
 package com.kunzisoft.androidclearchroma;
 
 /**
- * Created by Jeremy JAMET on 12/09/16.
+ * Enumeration of each form available for preview.
+ * @author JJamet
  */
 public enum ShapePreviewPreference {
     CIRCLE,

@@ -29,8 +29,9 @@ import static com.kunzisoft.androidclearchroma.fragment.ChromaColorFragment.ARG_
 import static com.kunzisoft.androidclearchroma.fragment.ChromaColorFragment.ARG_INITIAL_COLOR;
 
 /**
- * Created by Pavel Sikun on 28.03.16.
- * Modified by Jeremy JAMET on 12/09/16.
+ * Create Dialog who contains a ChromaColorFragment with buttons for confirmation. <br />
+ * To link events to OnColorSelectedListener, it is enough to implement the interface in the parent fragment or parent activity of the dialog.
+ * @author JJamet - Pavel Sikun
  */
 public class ChromaDialog extends DialogFragment {
 
@@ -47,7 +48,15 @@ public class ChromaDialog extends DialogFragment {
 
     private ChromaColorFragment chromaColorFragment;
 
-    public static ChromaDialog newInstance(String key, @ColorInt int initialColor, ColorMode colorMode, IndicatorMode indicatorMode) {
+    /**
+     * Build new instance of dialog
+     * @param key Can be null, key link to preference, used when dialog is in a preference view
+     * @param initialColor Initial color displayed in the dialog
+     * @param colorMode Color mode for selection
+     * @param indicatorMode Indicator mode
+     * @return New instance of ChromaDialog
+     */
+    public static ChromaDialog newInstance(@Nullable String key, @ColorInt int initialColor, ColorMode colorMode, IndicatorMode indicatorMode) {
         ChromaDialog fragment = new ChromaDialog();
         Bundle args = makeArgs(initialColor, colorMode, indicatorMode);
         args.putString(ARG_KEY, key);
@@ -55,6 +64,13 @@ public class ChromaDialog extends DialogFragment {
         return fragment;
     }
 
+    /**
+     * Build new instance of dialog
+     * @param initialColor Initial color displayed in the dialog
+     * @param colorMode Color mode for selection
+     * @param indicatorMode Indicator mode
+     * @return New instance of ChromaDialog
+     */
     private static ChromaDialog newInstance(@ColorInt int initialColor, ColorMode colorMode, IndicatorMode indicatorMode) {
         ChromaDialog fragment = new ChromaDialog();
         fragment.setArguments(makeArgs(initialColor, colorMode, indicatorMode));
@@ -131,8 +147,7 @@ public class ChromaDialog extends DialogFragment {
 
     /**
      * Set new dimensions to dialog
-     *
-     * @param ad
+     * @param ad dialog
      */
     private void measureLayout(Dialog ad) {
         TypedValue typedValue = new TypedValue();
@@ -206,7 +221,6 @@ public class ChromaDialog extends DialogFragment {
 
     /**
      * Get key associated to preference, or null if key not present
-     *
      * @return a String value, or null
      */
     public String getKeyPreference() {
@@ -215,7 +229,7 @@ public class ChromaDialog extends DialogFragment {
 
     /**
      * Get color listener if it was defined by setter else return null
-     * @return
+     * @return Interface object who contains events
      */
     public OnColorSelectedListener getOnColorSelectedListener() {
         return onColorSelectedListener;
@@ -224,7 +238,7 @@ public class ChromaDialog extends DialogFragment {
     /**
      * Defined listener for click on positive and negative button
      * You can implement OnColorSelectedListener in activity or fragment without use this setter for a better usability
-     * @param onColorSelectedListener
+     * @param onColorSelectedListener Interface for events
      */
     public void setOnColorSelectedListener(OnColorSelectedListener onColorSelectedListener) {
         this.onColorSelectedListener = onColorSelectedListener;
