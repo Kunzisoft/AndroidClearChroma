@@ -12,7 +12,7 @@
    - can be used as Dialog, Fragment or as Preference.
    - can select custom shape for preview color in preference
    - add color as part of summary string
-   - works on api-7 and up
+   - works on api-9 and up
 
 ## Donation
 
@@ -25,7 +25,7 @@ Donations will be used to create free and open source applications.
 [![Donation Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Kunzisoft/donate "Kunzisoft Liberapay Donation")
 
 ## Installation
-Add the JitPack repository in your build.gradle at the end of repositories:
+Add the JitPack repository in your **build.gradle** at the end of repositories:
 ```
 	allprojects {
 		repositories {
@@ -37,8 +37,35 @@ Add the JitPack repository in your build.gradle at the end of repositories:
 And add the dependency
 ```
 	dependencies {
-	        compile 'com.github.Kunzisoft:AndroidClearChroma:1.8'
+	        compile 'com.github.Kunzisoft:AndroidClearChroma:1.9'
 	}
+```
+
+### Library version
+AndroidClearChroma uses API 25 for the compat library, if you are using a new version for compilation, add this to your **build.gradle** file *(with the right versions)*  : 
+
+```
+ext {
+    supportlib_version = '26.1.0' // Lib version
+}
+
+dependencies {
+    ...
+    implementation "com.android.support:appcompat-v7:$supportlib_version"
+    implementation 'com.github.Kunzisoft:AndroidClearChroma:1.9' // AndroidClearChroma version
+     ...
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion "$supportlib_version"
+            }
+        }
+    }
+}
 ```
 
 ## Usage
@@ -206,7 +233,7 @@ ChromaUtil.getFormattedColorString(int color, boolean showAlpha);
 This project is a fork of [VintageChroma by Pavel Sikun](https://github.com/MrBIMC/VintageChroma).
 
 ## License
-Copyright 2017 JAMET Jeremy.
+Copyright 2018 JAMET Jeremy.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
