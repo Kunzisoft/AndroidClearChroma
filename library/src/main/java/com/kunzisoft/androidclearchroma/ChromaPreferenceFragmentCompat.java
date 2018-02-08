@@ -31,7 +31,7 @@ public abstract class ChromaPreferenceFragmentCompat extends PreferenceFragmentC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        ChromaDialog chromaDialog = (ChromaDialog) getChildFragmentManager().findFragmentByTag(TAG_FRAGMENT_DIALOG);
+        ChromaDialog chromaDialog = (ChromaDialog) getFragmentManager().findFragmentByTag(TAG_FRAGMENT_DIALOG);
         if (chromaDialog != null) {
             String keyPreference = chromaDialog.getKeyPreference();
             if (keyPreference != null)
@@ -61,7 +61,7 @@ public abstract class ChromaPreferenceFragmentCompat extends PreferenceFragmentC
         // If it was one of our custom Preferences, show its dialog
         if (dialogFragment != null) {
             dialogFragment.setTargetFragment(this, 0);
-            dialogFragment.show(getChildFragmentManager(), TAG_FRAGMENT_DIALOG);
+            dialogFragment.show(getFragmentManager(), TAG_FRAGMENT_DIALOG);
         }
         // Could not be handled here. Try with the super method.
         else {
