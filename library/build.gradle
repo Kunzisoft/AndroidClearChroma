@@ -23,11 +23,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:support-annotations:25.2.0'
-    compile 'com.android.support:preference-v7:25.2.0'
-    compile 'com.android.support:preference-v14:25.2.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:25.2.0'
+    implementation 'com.android.support:support-annotations:25.2.0'
+    implementation 'com.android.support:preference-v7:25.2.0'
+    implementation 'com.android.support:preference-v14:25.2.0'
 }
 
 ext {
