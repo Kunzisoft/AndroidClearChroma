@@ -1,4 +1,4 @@
-<PreferenceScreen
+<android.support.v7.preference.PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -13,7 +13,7 @@
         android:title="ARGB sample"
         android:summary="[color]"
         app:chromaColorMode="ARGB"
-        app:chromaInitialColor="@android:color/black"/>
+        android:defaultValue="@android:color/black"/>
 
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="argbhex"
@@ -21,20 +21,20 @@
         android:summary="ARGB and HEX [color]"
         app:chromaColorMode="ARGB"
         app:chromaIndicatorMode="HEX"
-        app:chromaInitialColor="#ae4f4f"/>
+        android:defaultValue="#ae4f4f"/>
 
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="hsv"
         android:title="HSV sample"
         app:chromaColorMode="HSV"
-        app:chromaInitialColor="#649e65"/>
+        android:defaultValue="#649e65"/>
 
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="roundedquare"
         android:title="ARGB sample with rounded square sample"
         app:chromaShapePreview="ROUNDED_SQUARE"
         app:chromaColorMode="ARGB"
-        app:chromaInitialColor="#ffee00"/>
+        android:defaultValue="#ffee00"/>
 
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="customsummary"
@@ -42,6 +42,6 @@
         android:summary="Example summary"
         app:chromaShapePreview="SQUARE"
         app:chromaColorMode="ARGB"
-        app:chromaInitialColor="#ff0004"/>
+        android:defaultValue="#ff0004"/>
 
-</PreferenceScreen>
+</android.support.v7.preference.PreferenceScreen>
