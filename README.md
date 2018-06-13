@@ -12,17 +12,14 @@
    - can be used as Dialog, Fragment or as Preference.
    - can select custom shape for preview color in preference
    - add color as part of summary string
-   - works on api-9 and up
 
-## Donation
+## Contribution
 
-Donations will be used to create free and open source applications.
+You can contribute in different ways to help.
 
-[![Donation Paypal](https://4.bp.blogspot.com/-ncaIbUGaHOk/WfhaThYUPGI/AAAAAAAAAVQ/_HidNgdB1q4DaC24ujaKNzH64KUUJiQewCLcBGAs/s1600/pay-with-paypal.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KM6QMDAXZM3UU "Kunzisoft Paypal Donation")
+* Add features by a **[pull request](https://help.github.com/articles/about-pull-requests/)**.
+* **[Donate](https://www.kunzisoft.com/donation)**  (｡◕‿◕｡)  will be used to create free and open source applications.
 
-<a href="bitcoin:1DSwXCk7Sob24sNsofywNoRQw2f5Qj5t2F"><img src="https://2.bp.blogspot.com/-K7-LKnSZd7c/WkvIKpLdmKI/AAAAAAAAAVs/-5LTimDq5IURMHwMmEP5VPTT53b2EUsswCLcBGAs/s1600/donate-with-bitcoin.png" alt="Kunzisoft Bitcoin" />Bitcoin wallet address : 1DSwXCk7Sob24sNsofywNoRQw2f5Qj5t2F</a>
-
-[![Donation Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Kunzisoft/donate "Kunzisoft Liberapay Donation")
 
 ## Installation
 Add the JitPack repository in your **build.gradle** at the end of repositories:
@@ -37,7 +34,7 @@ Add the JitPack repository in your **build.gradle** at the end of repositories:
 And add the dependency
 ```
 	dependencies {
-	        compile 'com.github.Kunzisoft:AndroidClearChroma:1.9'
+	        compile 'com.github.Kunzisoft:AndroidClearChroma:2.0'
 	}
 ```
 
@@ -54,17 +51,6 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$supportlib_version"
     implementation 'com.github.Kunzisoft:AndroidClearChroma:1.9' // AndroidClearChroma version
      ...
-}
-
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == 'com.android.support') {
-            if (!requested.name.startsWith("multidex")) {
-                details.useVersion "$supportlib_version"
-            }
-        }
-    }
 }
 ```
 
@@ -155,13 +141,14 @@ or (for API < 14)
 **A.** Add Preference to your *.xml preference layout:
 ``` xml
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
+    	xmlns:chroma="http://schemas.android.com/apk/res-auto"
         android:key="hsv" // any key you want
         android:title="HSV sample" // summary will be automatically fetched from the current color
         android:summary="text and [color] string" // add [color] for show current color as string in summary
-        app:chromaShapePreview="ROUNDED_SQUARE" // CIRCLE, SQUARE, ROUNDED_SQUARE
-        app:chromaColorMode="HSV" // RGB, ARGB, HSV, HSL, CMYK, CMYK255
-        app:chromaIndicatorMode="HEX" // HEX or DECIMAL
-        app:chromaInitialColor="@color/colorAccent"/> // default color
+        chroma:chromaShapePreview="ROUNDED_SQUARE" // CIRCLE, SQUARE, ROUNDED_SQUARE
+        chroma:chromaColorMode="HSV" // RGB, ARGB, HSV, HSL, CMYK, CMYK255
+        chroma:chromaIndicatorMode="HEX" // HEX or DECIMAL
+        chroma:chromaInitialColor="@color/colorAccent"/> // default color
 ```
 
 **B.** Or you can add preferences dynamically from the code:
