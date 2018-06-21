@@ -39,17 +39,17 @@ And add the dependency
 ```
 
 ### Library version
-AndroidClearChroma uses API 25 for the compat library, if you are using a new version for compilation, add this to your **build.gradle** file *(with the right versions)*  : 
+AndroidClearChroma uses API 27 for the compat library, if you are using a new version for compilation, add this to your **build.gradle** file *(with the right versions)*  : 
 
 ```
 ext {
-    supportlib_version = '26.1.0' // Lib version
+    supportlib_version = '27.1.1' // Lib version
 }
 
 dependencies {
     ...
     implementation "com.android.support:appcompat-v7:$supportlib_version"
-    implementation 'com.github.Kunzisoft:AndroidClearChroma:1.9' // AndroidClearChroma version
+    implementation 'com.github.Kunzisoft:AndroidClearChroma:2.0' // AndroidClearChroma version
      ...
 }
 ```
@@ -121,7 +121,7 @@ For custom dialog, simply redefined following nodes :
 
 ```
 
-### ChromaPreferenceCompat
+### Preference
 
 You must add a `preferenceTheme` node in your activity :
 ```
@@ -142,13 +142,13 @@ or (for API < 14)
 ``` xml
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
     	xmlns:chroma="http://schemas.android.com/apk/res-auto"
-        android:key="hsv" // any key you want
-        android:title="HSV sample" // summary will be automatically fetched from the current color
-        android:summary="text and [color] string" // add [color] for show current color as string in summary
-        chroma:chromaShapePreview="ROUNDED_SQUARE" // CIRCLE, SQUARE, ROUNDED_SQUARE
-        chroma:chromaColorMode="HSV" // RGB, ARGB, HSV, HSL, CMYK, CMYK255
-        chroma:chromaIndicatorMode="HEX" // HEX or DECIMAL
-        chroma:chromaInitialColor="@color/colorAccent"/> // default color
+        android:key="chroma_preference_key" 				// any key you want
+        android:title="HSV sample" 							// summary will be automatically fetched from the current color
+        android:summary="text and [color] string" 			// add [color] for show current color as string in summary
+        android:defaultValue=="@color/colorAccent" 			// default color
+        chroma:chromaShapePreview="ROUNDED_SQUARE"			// CIRCLE, SQUARE, ROUNDED_SQUARE
+        chroma:chromaColorMode="HSV"						// RGB, ARGB, HSV, HSL, CMYK, CMYK255
+        chroma:chromaIndicatorMode="HEX" />					// HEX or DECIMAL 
 ```
 
 **B.** Or you can add preferences dynamically from the code:
@@ -169,9 +169,14 @@ public class ColorPreferenceFragmentCompat extends ChromaPreferenceFragmentCompa
 
         @Override
         public void onCreatePreferences(Bundle bundle, String s) {
-            addPreferencesFromResource(R.xml.prefs_v7); // load your ChromaPreferenceCompat prefs from xml
+            addPreferencesFromResource(R.xml.prefs); // load your ChromaPreferenceCompat prefs from xml
         }
     }
+```
+Then get the color from the preference.
+```
+SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+@ColorRes int color = preferences.getInt("chroma_preference_key", ContextCompat.getColor(context, R.color.colorPrimary));
 ```
 
 ### Fragment
