@@ -108,8 +108,17 @@ public class ChromaPreferenceCompat extends DialogPreference {
 
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
-        super.onSetInitialValue(restorePersistedValue, defaultValue);
-        color = getPersistedInt(color);
+        if (restorePersistedValue) {
+            color = getPersistedInt(color);
+        } else {
+            color = (int) defaultValue;
+            persistInt(color);
+        }
+    }
+
+    @Override
+    protected Object onGetDefaultValue(TypedArray a, int index) {
+        return Color.parseColor(a.getString(index));
     }
 
     @Override
