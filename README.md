@@ -145,7 +145,7 @@ or (for API < 14)
         android:key="chroma_preference_key" 				// any key you want
         android:title="HSV sample" 							// summary will be automatically fetched from the current color
         android:summary="text and [color] string" 			// add [color] for show current color as string in summary
-        android:defaultValue=="@color/colorAccent" 			// default color
+        android:defaultValue="@color/colorAccent" 			// default color
         chroma:chromaShapePreview="ROUNDED_SQUARE"			// CIRCLE, SQUARE, ROUNDED_SQUARE
         chroma:chromaColorMode="HSV"						// RGB, ARGB, HSV, HSL, CMYK, CMYK255
         chroma:chromaIndicatorMode="HEX" />					// HEX or DECIMAL 
