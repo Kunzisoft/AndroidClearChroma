@@ -34,22 +34,22 @@ Add the JitPack repository in your **build.gradle** at the end of repositories:
 And add the dependency
 ```
 	dependencies {
-	        compile 'com.github.Kunzisoft:AndroidClearChroma:2.0'
+	        compile 'com.github.Kunzisoft:AndroidClearChroma:2.1'
 	}
 ```
 
 ### Library version
-AndroidClearChroma uses API 27 for the compat library, if you are using a new version for compilation, add this to your **build.gradle** file *(with the right versions)*  : 
+AndroidClearChroma uses API 28 for the compat library, if you are using a new version for compilation, add this to your **build.gradle** file *(with the right versions)*  : 
 
 ```
 ext {
-    supportlib_version = '27.1.1' // Lib version
+    supportlib_version = '28.0.0' // Lib version
 }
 
 dependencies {
     ...
     implementation "com.android.support:appcompat-v7:$supportlib_version"
-    implementation 'com.github.Kunzisoft:AndroidClearChroma:2.0' // AndroidClearChroma version
+    implementation 'com.github.Kunzisoft:AndroidClearChroma:2.1' // AndroidClearChroma version
      ...
 }
 ```
@@ -162,7 +162,7 @@ or (for API < 14)
     getPreferenceScreen().addPreference(pref);
 ```
 
-You can use `ChromaPreferenceFragmentCompat` for an easier managing of fragment in Preferences.
+Use `ChromaPreferenceFragmentCompat` as a superclass for managing fragments in Preferences.
 
 ```
 public class ColorPreferenceFragmentCompat extends ChromaPreferenceFragmentCompat {
