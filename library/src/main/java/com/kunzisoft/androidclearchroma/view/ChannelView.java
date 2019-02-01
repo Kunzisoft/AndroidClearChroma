@@ -13,7 +13,7 @@ import com.kunzisoft.androidclearchroma.colormode.Channel;
 
 /**
  * TODO Must be a fragment, isn't a normal view
- * @author Pavel Sikun
+ * @author JJamet, Pavel Sikun
  */
 public class ChannelView extends RelativeLayout {
 
@@ -42,18 +42,18 @@ public class ChannelView extends RelativeLayout {
                             + " must be between " + channel.getMin() + " and " + channel.getMax());
         }
 
-            View rootView = inflate(context, R.layout.channel_row, this);
-            bindViews(rootView);
-        }
+        View rootView = inflate(context, R.layout.channel_row, this);
+        bindViews(rootView);
+    }
 
     private void bindViews(View rootView) {
-        TextView label = (TextView) rootView.findViewById(R.id.label);
+        TextView label = rootView.findViewById(R.id.label);
         label.setText(context.getString(channel.getNameResourceId()));
 
-        final TextView progressView = (TextView) rootView.findViewById(R.id.progress_text);
+        final TextView progressView = rootView.findViewById(R.id.progress_text);
         setProgress(progressView, channel.getProgress());
 
-        SeekBar seekbar = (SeekBar) rootView.findViewById(R.id.seekbar);
+        SeekBar seekbar = rootView.findViewById(R.id.seekbar);
         seekbar.setMax(channel.getMax());
         seekbar.setProgress(channel.getProgress());
 

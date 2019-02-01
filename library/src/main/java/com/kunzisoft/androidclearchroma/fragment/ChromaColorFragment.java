@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
@@ -73,7 +74,7 @@ public class ChromaColorFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.chroma_color_fragment, container, false);
@@ -98,7 +99,7 @@ public class ChromaColorFragment extends Fragment {
         if (indicatorMode == null)
             indicatorMode = IndicatorMode.DECIMAL;
 
-        colorView = (AppCompatImageView) root.findViewById(R.id.color_view);
+        colorView = root.findViewById(R.id.color_view);
         Drawable colorViewDrawable = new ColorDrawable(currentColor);
         colorView.setImageDrawable(colorViewDrawable);
 
@@ -130,7 +131,7 @@ public class ChromaColorFragment extends Fragment {
             }
         };
 
-        ViewGroup channelContainer = (ViewGroup) root.findViewById(R.id.channel_container);
+        ViewGroup channelContainer = root.findViewById(R.id.channel_container);
         for (ChannelView c : channelViews) {
             channelContainer.addView(c);
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) c.getLayoutParams();
@@ -144,7 +145,7 @@ public class ChromaColorFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(ARG_INITIAL_COLOR, currentColor);
         outState.putInt(ARG_COLOR_MODE, colorMode.ordinal());

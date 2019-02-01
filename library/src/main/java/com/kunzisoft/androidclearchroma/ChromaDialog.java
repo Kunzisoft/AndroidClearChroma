@@ -12,13 +12,10 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.TypedValue;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.kunzisoft.androidclearchroma.colormode.ColorMode;
 import com.kunzisoft.androidclearchroma.fragment.ChromaColorFragment;
@@ -47,6 +44,8 @@ public class ChromaDialog extends DialogFragment {
     private OnColorSelectedListener onColorSelectedListener;
 
     private ChromaColorFragment chromaColorFragment;
+
+    private View rootView;
 
     /**
      * Build new instance of dialog
@@ -83,84 +82,6 @@ public class ChromaDialog extends DialogFragment {
         args.putInt(ARG_COLOR_MODE, colorMode.ordinal());
         args.putInt(ARG_INDICATOR_MODE, indicatorMode.ordinal());
         return args;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(STYLE_NO_TITLE, R.style.Chroma_AlertDialog);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View root = inflater.inflate(R.layout.color_dialog_fragment, container, false);
-
-        FragmentManager fragmentManager = getChildFragmentManager();
-        chromaColorFragment = (ChromaColorFragment) fragmentManager.findFragmentByTag(TAG_FRAGMENT_COLORS);
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if (chromaColorFragment == null) {
-            chromaColorFragment = ChromaColorFragment.newInstance(getArguments());
-            fragmentTransaction.add(R.id.color_dialog_container, chromaColorFragment, TAG_FRAGMENT_COLORS).commit();
-        }
-
-        LinearLayout buttonBar = (LinearLayout) root.findViewById(R.id.button_bar);
-        Button positiveButton = (Button) buttonBar.findViewById(R.id.positive_button);
-        Button negativeButton = (Button) buttonBar.findViewById(R.id.negative_button);
-
-        positiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Activity activity = getActivity();
-                final Fragment fragment = getTargetFragment();
-                if(onColorSelectedListener != null) {
-                    onColorSelectedListener.onPositiveButtonClick(chromaColorFragment.getCurrentColor());
-                } else if (activity instanceof OnColorSelectedListener) {
-                    ((OnColorSelectedListener) activity).onPositiveButtonClick(chromaColorFragment.getCurrentColor());
-                } else if (fragment instanceof OnColorSelectedListener) {
-                    ((OnColorSelectedListener) fragment).onPositiveButtonClick(chromaColorFragment.getCurrentColor());
-                }
-                dismiss();
-            }
-        });
-
-        negativeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Activity activity = getActivity();
-                final Fragment fragment = getTargetFragment();
-                if(onColorSelectedListener != null) {
-                    onColorSelectedListener.onNegativeButtonClick(chromaColorFragment.getCurrentColor());
-                } else if (activity instanceof OnColorSelectedListener) {
-                    ((OnColorSelectedListener) activity).onNegativeButtonClick(chromaColorFragment.getCurrentColor());
-                } else if (fragment instanceof OnColorSelectedListener) {
-                    ((OnColorSelectedListener) fragment).onNegativeButtonClick(chromaColorFragment.getCurrentColor());
-                }
-                dismiss();
-            }
-        });
-
-        return root;
-    }
-
-    /**
-     * Set new dimensions to dialog
-     * @param ad dialog
-     */
-    private void measureLayout(Dialog ad) {
-        TypedValue typedValue = new TypedValue();
-        getResources().getValue(R.dimen.chroma_dialog_height_multiplier, typedValue, true);
-        float heightMultiplier = typedValue.getFloat();
-        int height = (int) ((ad.getContext().getResources().getDisplayMetrics().heightPixels) * heightMultiplier);
-
-        getResources().getValue(R.dimen.chroma_dialog_width_multiplier, typedValue, true);
-        float widthMultiplier = typedValue.getFloat();
-        int width = (int) ((ad.getContext().getResources().getDisplayMetrics().widthPixels) * widthMultiplier);
-
-        if (ad.getWindow() != null)
-            ad.getWindow().setLayout(width, height);
     }
 
     /**
@@ -203,20 +124,64 @@ public class ChromaDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
 
-        // request a window without the title
-        assert dialog.getWindow() != null;
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        assert getActivity() != null;
 
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        AlertDialog.Builder alertDialogBuilder =  new  AlertDialog.Builder(getActivity());
+
+        rootView = getActivity().getLayoutInflater().inflate(R.layout.color_dialog_fragment, null);
+
+        FragmentManager fragmentManager = getChildFragmentManager();
+        chromaColorFragment = (ChromaColorFragment) fragmentManager.findFragmentByTag(TAG_FRAGMENT_COLORS);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (chromaColorFragment == null) {
+            chromaColorFragment = ChromaColorFragment.newInstance(getArguments());
+            fragmentTransaction.add(R.id.color_dialog_container, chromaColorFragment, TAG_FRAGMENT_COLORS).commit();
+        }
+
+        alertDialogBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
-            public void onShow(DialogInterface dialog) {
-                measureLayout((Dialog) dialog);
+            public void onClick(DialogInterface dialog, int which) {
+                final Activity activity = getActivity();
+                final Fragment fragment = getTargetFragment();
+                if(onColorSelectedListener != null) {
+                    onColorSelectedListener.onPositiveButtonClick(chromaColorFragment.getCurrentColor());
+                } else if (activity instanceof OnColorSelectedListener) {
+                    ((OnColorSelectedListener) activity).onPositiveButtonClick(chromaColorFragment.getCurrentColor());
+                } else if (fragment instanceof OnColorSelectedListener) {
+                    ((OnColorSelectedListener) fragment).onPositiveButtonClick(chromaColorFragment.getCurrentColor());
+                }
+                dismiss();
             }
         });
 
-        return dialog;
+        alertDialogBuilder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final Activity activity = getActivity();
+                final Fragment fragment = getTargetFragment();
+                if(onColorSelectedListener != null) {
+                    onColorSelectedListener.onNegativeButtonClick(chromaColorFragment.getCurrentColor());
+                } else if (activity instanceof OnColorSelectedListener) {
+                    ((OnColorSelectedListener) activity).onNegativeButtonClick(chromaColorFragment.getCurrentColor());
+                } else if (fragment instanceof OnColorSelectedListener) {
+                    ((OnColorSelectedListener) fragment).onNegativeButtonClick(chromaColorFragment.getCurrentColor());
+                }
+                dismiss();
+            }
+        });
+
+        alertDialogBuilder.setView(rootView);
+
+        return alertDialogBuilder.create();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        return rootView;
     }
 
     /**
@@ -224,7 +189,7 @@ public class ChromaDialog extends DialogFragment {
      * @return a String value, or null
      */
     public String getKeyPreference() {
-        return getArguments().getString(ARG_KEY);
+        return getArguments() != null ? getArguments().getString(ARG_KEY) : null;
     }
 
     /**

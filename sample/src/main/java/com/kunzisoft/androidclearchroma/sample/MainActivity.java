@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         // Load defaultValues from prefs_v7.xml
         PreferenceManager.setDefaultValues(this, R.xml.prefs_v7, false);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        textView = (TextView) findViewById(R.id.text_view);
-        spinner = (Spinner) findViewById(R.id.spinner);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        toolbar = findViewById(R.id.toolbar);
+        textView = findViewById(R.id.text_view);
+        spinner = findViewById(R.id.spinner);
+        fab = findViewById(R.id.fab);
 
         if (savedInstanceState == null) {
             color = ContextCompat.getColor(this, R.color.colorPrimary);

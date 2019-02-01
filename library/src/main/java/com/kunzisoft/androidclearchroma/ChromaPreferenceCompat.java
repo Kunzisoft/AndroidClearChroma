@@ -49,25 +49,25 @@ public class ChromaPreferenceCompat extends DialogPreference {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public ChromaPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs);
+        init(attrs);
     }
 
     public ChromaPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
+        init(attrs);
     }
 
     public ChromaPreferenceCompat(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
+        init(attrs);
     }
 
     public ChromaPreferenceCompat(Context context) {
         super(context);
-        init(context, null);
+        init(null);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    private void init(AttributeSet attrs) {
         setWidgetLayoutResource(R.layout.preference_layout);
         loadValuesFromXml(attrs);
         updatePreview();
@@ -125,8 +125,8 @@ public class ChromaPreferenceCompat extends DialogPreference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        backgroundPreview = (AppCompatImageView) holder.itemView.findViewById(R.id.backgroundPreview);
-        colorPreview = (AppCompatImageView) holder.itemView.findViewById(R.id.colorPreview);
+        backgroundPreview = holder.itemView.findViewById(R.id.backgroundPreview);
+        colorPreview = holder.itemView.findViewById(R.id.colorPreview);
         updatePreview();
 
         if(!isEnabled()) {

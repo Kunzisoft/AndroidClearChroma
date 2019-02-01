@@ -31,7 +31,7 @@ public abstract class ChromaPreferenceFragmentCompat extends PreferenceFragmentC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        ChromaDialog chromaDialog = (ChromaDialog) getFragmentManager().findFragmentByTag(TAG_FRAGMENT_DIALOG);
+        ChromaDialog chromaDialog = (ChromaDialog) (getFragmentManager() != null ? getFragmentManager().findFragmentByTag(TAG_FRAGMENT_DIALOG) : null);
         if (chromaDialog != null) {
             String keyPreference = chromaDialog.getKeyPreference();
             if (keyPreference != null)
@@ -59,7 +59,7 @@ public abstract class ChromaPreferenceFragmentCompat extends PreferenceFragmentC
         }
 
         // If it was one of our custom Preferences, show its dialog
-        if (dialogFragment != null) {
+        if (dialogFragment != null && getFragmentManager() != null) {
             dialogFragment.setTargetFragment(this, 0);
             dialogFragment.show(getFragmentManager(), TAG_FRAGMENT_DIALOG);
         }
@@ -71,7 +71,7 @@ public abstract class ChromaPreferenceFragmentCompat extends PreferenceFragmentC
 
     @Override
     public void onPositiveButtonClick(@ColorInt int color) {
-        if (currentPreference != null && currentPreference instanceof ChromaPreferenceCompat) {
+        if (currentPreference instanceof ChromaPreferenceCompat) {
             ((ChromaPreferenceCompat) currentPreference).setColor(color);
         }
     }
