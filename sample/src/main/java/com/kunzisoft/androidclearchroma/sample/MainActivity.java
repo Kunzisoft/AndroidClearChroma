@@ -147,16 +147,7 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         else {
             toolbar.setBackgroundDrawable(new ColorDrawable(newColor));
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(darkenColor(newColor));
-        }
-    }
-
-    private int darkenColor(int color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] *= 0.8f;
-        return Color.HSVToColor(hsv);
+        Utility.updatetatusBar(this, newColor);
     }
 
     @Override

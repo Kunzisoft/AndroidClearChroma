@@ -19,7 +19,6 @@
         android:key="argbhex"
         android:title="ARGB and HEX indicator sample"
         android:summary="ARGB and HEX [color]"
-        android:icon="@drawable/palette"
         app:chromaColorMode="ARGB"
         app:chromaIndicatorMode="HEX"
         android:defaultValue="#ae4f4f"/>
@@ -27,12 +26,12 @@
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="hsv"
         android:title="HSV sample"
-        android:icon="@drawable/palette"
         app:chromaColorMode="HSV"
         android:defaultValue="#649e65"/>
 
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="roundedquare"
+        android:icon="@drawable/palette"
         android:title="ARGB sample with rounded square sample"
         app:chromaShapePreview="ROUNDED_SQUARE"
         app:chromaColorMode="ARGB"
@@ -40,6 +39,7 @@
 
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="customsummary"
+        android:icon="@drawable/palette"
         android:title="ARGB sample with square sample and custom summary"
         android:summary="Example summary"
         app:chromaShapePreview="SQUARE"

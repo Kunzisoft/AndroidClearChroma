@@ -69,6 +69,7 @@ public class FragmentColorActivity extends AppCompatActivity implements OnColorC
     public void onColorChanged(@ColorInt int color) {
         initialColor = color;
         toolbar.setBackgroundDrawable(new ColorDrawable(color));
+        Utility.updatetatusBar(this, color);
         toolbar.setTitle(ChromaUtil.getFormattedColorString(color, false));
     }
 }
