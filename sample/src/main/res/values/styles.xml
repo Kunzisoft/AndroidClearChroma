@@ -11,4 +11,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.Settings" parent="AppTheme">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
+
 </resources>
