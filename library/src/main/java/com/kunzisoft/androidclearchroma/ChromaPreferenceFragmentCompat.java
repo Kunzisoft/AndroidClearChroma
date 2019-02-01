@@ -1,9 +1,9 @@
 package com.kunzisoft.androidclearchroma;
 
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
+import androidx.annotation.ColorInt;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

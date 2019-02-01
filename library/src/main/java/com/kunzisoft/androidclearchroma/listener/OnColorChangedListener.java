@@ -1,6 +1,6 @@
 package com.kunzisoft.androidclearchroma.listener;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 /**
  * Callback listener for color changed
