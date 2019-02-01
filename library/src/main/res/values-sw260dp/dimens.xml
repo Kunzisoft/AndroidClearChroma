@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="color_view_height">98dp</dimen>
-    <dimen name="color_view_width">98dp</dimen>
-    <dimen name="chroma_dialog_width">268dp</dimen>
-
     <item name="chroma_dialog_height_multiplier" format="float" type="dimen">0.9</item>
-    <item name="chroma_dialog_width_multiplier" format="float" type="dimen">1</item>
+    <item name="chroma_dialog_width_multiplier" format="float" type="dimen">0.9</item>
 </resources>
