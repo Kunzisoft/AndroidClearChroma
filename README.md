@@ -99,27 +99,7 @@ for complete sample of ChromaDialog
 
 <img src="https://raw.githubusercontent.com/Kunzisoft/AndroidClearChroma/master/art/screen4.png" width="505">
 
-For custom dialog, simply redefined following nodes : 
-
-```
-<style name="Chroma.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-	<!-- Used for the buttons -->
-	<item name="colorAccent">#fff1c8</item>
-	<!-- Used for the title and text -->
-	<item name="android:textColorPrimary">#c7c7c7</item>
-	<!-- Used for the background -->
-	<item name="android:background">#353535</item>
- </style>
-
-<style name="Chroma.AlertDialog.Label" parent="TextAppearance.AppCompat.Body1">
-	<item name="android:textColor">#a7a7a7</item>
-</style>
-
-<style name="Chroma.AlertDialog.Value" parent="TextAppearance.AppCompat.Body2">
-	<item name="android:textColor">#939393</item>
-</style>
-
-```
+AndroidClearChroma uses the DialogFragment style of your app.
 
 ### Preference
 
@@ -145,7 +125,7 @@ or (for API < 14)
         android:key="chroma_preference_key" 				// any key you want
         android:title="HSV sample" 							// summary will be automatically fetched from the current color
         android:summary="text and [color] string" 			// add [color] for show current color as string in summary
-        android:defaultValue=="@color/colorAccent" 			// default color
+        android:defaultValue="@color/colorAccent" 			// default color
         chroma:chromaShapePreview="ROUNDED_SQUARE"			// CIRCLE, SQUARE, ROUNDED_SQUARE
         chroma:chromaColorMode="HSV"						// RGB, ARGB, HSV, HSL, CMYK, CMYK255
         chroma:chromaIndicatorMode="HEX" />					// HEX or DECIMAL 

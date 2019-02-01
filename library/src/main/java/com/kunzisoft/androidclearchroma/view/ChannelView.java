@@ -1,7 +1,9 @@
 package com.kunzisoft.androidclearchroma.view;
 
 import android.content.Context;
-import android.support.annotation.ColorInt;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -12,48 +14,53 @@ import com.kunzisoft.androidclearchroma.R;
 import com.kunzisoft.androidclearchroma.colormode.Channel;
 
 /**
- * TODO Must be a fragment, isn't a normal view
+ * Channel view to show each color channel
  * @author JJamet, Pavel Sikun
  */
 public class ChannelView extends RelativeLayout {
 
-    private final Channel channel;
-    private final IndicatorMode indicatorMode;
+    private TextView label;
+    private TextView progressView;
+    private SeekBar seekbar;
 
-    private Context context;
+    private Channel channel;
+    private IndicatorMode indicatorMode;
 
     private OnProgressChangedListener listener;
 
-    public interface OnProgressChangedListener {
-        void onProgressChanged();
-    }
-
-    public ChannelView(Channel channel, @ColorInt int color, IndicatorMode indicatorMode, Context context) {
+    public ChannelView(Context context) {
         super(context);
-        this.channel = channel;
-        this.indicatorMode = indicatorMode;
-        this.context = context;
-
-        channel.setProgress(channel.getExtractor().extract(color));
-        if(channel.getProgress() < channel.getMin() || channel.getProgress() > channel.getMax()) {
-            throw new IllegalArgumentException(
-                    "Initial progress " + channel.getProgress()
-                            + " for channel: " + channel.getClass().getSimpleName()
-                            + " must be between " + channel.getMin() + " and " + channel.getMax());
-        }
-
-        View rootView = inflate(context, R.layout.channel_row, this);
-        bindViews(rootView);
+        init(context);
     }
 
-    private void bindViews(View rootView) {
-        TextView label = rootView.findViewById(R.id.label);
-        label.setText(context.getString(channel.getNameResourceId()));
+    public ChannelView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
 
-        final TextView progressView = rootView.findViewById(R.id.progress_text);
+    public ChannelView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ChannelView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context);
+    }
+
+    private void init(Context context) {
+        View rootView = inflate(context, R.layout.channel_row, this);
+        label = rootView.findViewById(R.id.label);
+        progressView = rootView.findViewById(R.id.progress_text);
+        seekbar = rootView.findViewById(R.id.seekbar);
+    }
+
+    private void bindViews() {
+        label.setText(getContext().getString(channel.getNameResourceId()));
+
         setProgress(progressView, channel.getProgress());
 
-        SeekBar seekbar = rootView.findViewById(R.id.seekbar);
         seekbar.setMax(channel.getMax());
         seekbar.setProgress(channel.getProgress());
 
@@ -85,13 +92,32 @@ public class ChannelView extends RelativeLayout {
         this.listener = listener;
     }
 
+    public void setChannel(Channel channel) {
+        setChannel(channel, IndicatorMode.DECIMAL);
+    }
+
+    public void setChannel(Channel channel, IndicatorMode indicatorMode) {
+        this.channel = channel;
+        this.indicatorMode = indicatorMode;
+
+        bindViews();
+    }
+
     public Channel getChannel() {
         return channel;
+    }
+
+    public IndicatorMode getIndicatorMode() {
+        return indicatorMode;
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         listener = null;
+    }
+
+    public interface OnProgressChangedListener {
+        void onProgressChanged();
     }
 }

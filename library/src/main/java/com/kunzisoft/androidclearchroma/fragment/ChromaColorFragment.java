@@ -106,7 +106,19 @@ public class ChromaColorFragment extends Fragment {
         List<Channel> channels = colorMode.getColorMode().getChannels();
         final List<ChannelView> channelViews = new ArrayList<>();
         for (Channel channel : channels) {
-            channelViews.add(new ChannelView(channel, currentColor, indicatorMode, getContext()));
+            ChannelView channelView = new ChannelView(getContext());
+
+            // Assign the progress from the color
+            channel.setProgress(channel.getExtractor().extract(currentColor));
+            if(channel.getProgress() < channel.getMin() || channel.getProgress() > channel.getMax()) {
+                throw new IllegalArgumentException(
+                        "Initial progress " + channel.getProgress()
+                                + " for channel: " + channel.getClass().getSimpleName()
+                                + " must be between " + channel.getMin() + " and " + channel.getMax());
+            }
+
+            channelView.setChannel(channel, indicatorMode);
+            channelViews.add(channelView);
         }
 
         ChannelView.OnProgressChangedListener seekBarChangeListener = new ChannelView.OnProgressChangedListener() {
