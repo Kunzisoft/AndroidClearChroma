@@ -13,9 +13,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import com.kunzisoft.androidclearchroma.colormode.ColorMode;
 import com.kunzisoft.androidclearchroma.fragment.ChromaColorFragment;
@@ -174,7 +176,38 @@ public class ChromaDialog extends DialogFragment {
 
         alertDialogBuilder.setView(rootView);
 
-        return alertDialogBuilder.create();
+        Dialog dialog = alertDialogBuilder.create();
+        // request a window without the title
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                measureLayout((Dialog) dialog);
+            }
+        });
+
+        return dialog;
+    }
+
+    /**
+     * Set new dimensions to dialog
+     * @param ad dialog
+     */
+    private void measureLayout(Dialog ad) {
+        TypedValue typedValue = new TypedValue();
+        getResources().getValue(R.dimen.chroma_dialog_height_multiplier, typedValue, true);
+        float heightMultiplier = typedValue.getFloat();
+        int height = (int) ((ad.getContext().getResources().getDisplayMetrics().heightPixels) * heightMultiplier);
+
+        getResources().getValue(R.dimen.chroma_dialog_width_multiplier, typedValue, true);
+        float widthMultiplier = typedValue.getFloat();
+        int width = (int) ((ad.getContext().getResources().getDisplayMetrics().widthPixels) * widthMultiplier);
+
+        if (ad.getWindow() != null)
+            ad.getWindow().setLayout(width, height);
     }
 
     @Nullable
