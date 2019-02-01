@@ -69,6 +69,7 @@ public class ChromaPreferenceCompat extends DialogPreference {
 
     private void init(AttributeSet attrs) {
         setWidgetLayoutResource(R.layout.preference_layout);
+        setIconSpaceReserved(false);
         loadValuesFromXml(attrs);
         updatePreview();
     }

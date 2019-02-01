@@ -58,6 +58,7 @@ public class PreferencesCompatActivity extends AppCompatActivity {
 
             //or add them manually
             ChromaPreferenceCompat pref = new ChromaPreferenceCompat(getContext());
+            pref.setIcon(R.drawable.palette);
             pref.setTitle("RGB(added from java)");
             pref.setSummary("Summary ...");
             pref.setColorMode(ColorMode.RGB);

@@ -19,6 +19,7 @@
         android:key="argbhex"
         android:title="ARGB and HEX indicator sample"
         android:summary="ARGB and HEX [color]"
+        android:icon="@drawable/palette"
         app:chromaColorMode="ARGB"
         app:chromaIndicatorMode="HEX"
         android:defaultValue="#ae4f4f"/>
@@ -26,6 +27,7 @@
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="hsv"
         android:title="HSV sample"
+        android:icon="@drawable/palette"
         app:chromaColorMode="HSV"
         android:defaultValue="#649e65"/>
 
