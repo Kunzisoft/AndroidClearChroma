@@ -14,7 +14,7 @@ import com.kunzisoft.androidclearchroma.R;
 import com.kunzisoft.androidclearchroma.colormode.Channel;
 
 /**
- * Channel view to show each color channel
+ * Channel view to show a color channel
  * @author JJamet, Pavel Sikun
  */
 public class ChannelView extends RelativeLayout {
@@ -88,14 +88,27 @@ public class ChannelView extends RelativeLayout {
                 : String.valueOf(progress));
     }
 
+    /**
+     * Attach a change listener to the channel view
+     * @param listener Listener to attach
+     */
     public void registerListener(OnProgressChangedListener listener) {
         this.listener = listener;
     }
 
+    /**
+     * Set a new channel to the view, the IndicatorMode.DECIMAL is used
+     * @param channel Channel to assign
+     */
     public void setChannel(Channel channel) {
         setChannel(channel, IndicatorMode.DECIMAL);
     }
 
+    /**
+     * Set a new channel to the view with a specific IndicatorMode
+     * @param channel Channel to assign
+     * @param indicatorMode Indicator to use
+     */
     public void setChannel(Channel channel, IndicatorMode indicatorMode) {
         this.channel = channel;
         this.indicatorMode = indicatorMode;
