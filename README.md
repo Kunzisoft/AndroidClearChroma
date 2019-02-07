@@ -32,7 +32,7 @@ Add the JitPack repository in your build.gradle at the end of repositories:
 	}
 ```
 And add the dependency
-[![](https://jitpack.io/v/Kunzisoft/Android-SwitchDateTimePicker.svg)](https://jitpack.io/#Kunzisoft/Android-SwitchDateTimePicker)
+[![](https://jitpack.io/v/Kunzisoft/AndroidClearChroma.svg)](https://jitpack.io/#Kunzisoft/AndroidClearChroma)
 *replacing ${version} with the version number in jitpack*
 ```
 	dependencies {
@@ -192,7 +192,7 @@ ChromaUtil.getFormattedColorString(int color, boolean showAlpha);
 This project is a fork of [VintageChroma by Pavel Sikun](https://github.com/MrBIMC/VintageChroma).
 
 ## License
-Copyright 2018 JAMET Jeremy.
+Copyright 2019 JAMET Jeremy.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
