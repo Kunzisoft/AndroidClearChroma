@@ -22,7 +22,7 @@ You can contribute in different ways to help.
 
 
 ## Installation
-Add the JitPack repository in your **build.gradle** at the end of repositories:
+Add the JitPack repository in your build.gradle at the end of repositories:
 ```
 	allprojects {
 		repositories {
@@ -32,27 +32,14 @@ Add the JitPack repository in your **build.gradle** at the end of repositories:
 	}
 ```
 And add the dependency
+[![](https://jitpack.io/v/Kunzisoft/Android-SwitchDateTimePicker.svg)](https://jitpack.io/#Kunzisoft/Android-SwitchDateTimePicker)
+*replacing ${version} with the version number in jitpack*
 ```
 	dependencies {
-	        compile 'com.github.Kunzisoft:AndroidClearChroma:2.1'
+	        implementation 'com.github.Kunzisoft:AndroidClearChroma:${version}'
 	}
 ```
-
-### Library version
-AndroidClearChroma uses API 28 for the compat library, if you are using a new version for compilation, add this to your **build.gradle** file *(with the right versions)*  : 
-
-```
-ext {
-    supportlib_version = '28.0.0' // Lib version
-}
-
-dependencies {
-    ...
-    implementation "com.android.support:appcompat-v7:$supportlib_version"
-    implementation 'com.github.Kunzisoft:AndroidClearChroma:2.1' // AndroidClearChroma version
-     ...
-}
-```
+AndroidClearChroma uses AndroidX as compat library.
 
 ## Usage
 
