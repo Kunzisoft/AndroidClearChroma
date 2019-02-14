@@ -14,14 +14,15 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
-import androidx.annotation.ColorInt;
-import androidx.preference.DialogPreference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 
 import com.kunzisoft.androidclearchroma.colormode.ColorMode;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.preference.DialogPreference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * Compatibility DialogPreference class that handles preferences, selected color display, and dialog box for selecting this color.
@@ -69,7 +70,6 @@ public class ChromaPreferenceCompat extends DialogPreference {
 
     private void init(AttributeSet attrs) {
         setWidgetLayoutResource(R.layout.preference_layout);
-        setIconSpaceReserved(false);
         loadValuesFromXml(attrs);
         updatePreview();
     }
