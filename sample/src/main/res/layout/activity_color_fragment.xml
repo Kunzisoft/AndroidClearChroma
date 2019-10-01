@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.kunzisoft.androidclearchroma.view.ChromaColorView
-        android:id="@+id/chroma_color_view"
+    <FrameLayout
+        android:id="@+id/container_color_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </FrameLayout>

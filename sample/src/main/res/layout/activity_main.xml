@@ -26,10 +26,17 @@
         android:paddingTop="?attr/actionBarSize"
         android:orientation="vertical">
         <Button
-            android:id="@+id/buttonOpenView"
+            android:id="@+id/button_open_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/open_fragment"
+            android:layout_margin="6dp"/>
+
+        <Button
+            android:id="@+id/button_open_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/open_view"
             android:layout_margin="6dp"/>
 
         <Button

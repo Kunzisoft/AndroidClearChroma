@@ -92,12 +92,21 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         });
 
         // Events for each button
-        findViewById(R.id.buttonOpenView).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_open_fragment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, FragmentColorActivity.class));
             }
         });
+
+        // Events for each button
+        findViewById(R.id.button_open_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ViewColorActivity.class));
+            }
+        });
+
 
         findViewById(R.id.prefsButton).setOnClickListener(new View.OnClickListener() {
             @Override
