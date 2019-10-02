@@ -25,6 +25,10 @@
             android:label="@string/app_name"/>
 
         <activity
+            android:name="com.kunzisoft.androidclearchroma.sample.ViewColorActivity"
+            android:label="@string/app_name"/>
+
+        <activity
             android:name="com.kunzisoft.androidclearchroma.sample.PreferencesCompatActivity"
             android:label="@string/app_name"/>
 

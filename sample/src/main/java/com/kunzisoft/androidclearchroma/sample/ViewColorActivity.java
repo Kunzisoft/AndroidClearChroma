@@ -3,33 +3,31 @@ package com.kunzisoft.androidclearchroma.sample;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.kunzisoft.androidclearchroma.ChromaUtil;
-import com.kunzisoft.androidclearchroma.IndicatorMode;
-import com.kunzisoft.androidclearchroma.colormode.ColorMode;
-import com.kunzisoft.androidclearchroma.fragment.ChromaColorFragment;
 import com.kunzisoft.androidclearchroma.listener.OnColorChangedListener;
+import com.kunzisoft.androidclearchroma.view.ChromaColorView;
 
 /**
- * An activity that simply displays the color fragment.
+ * An activity that simply displays the color view.
  */
-public class FragmentColorActivity extends AppCompatActivity implements OnColorChangedListener {
-
-    private static final String TAG_COLOR_FRAGMENT = "TAG_COLOR_FRAGMENT";
+public class ViewColorActivity extends AppCompatActivity implements OnColorChangedListener {
 
     private static final String SAVED_COLOR = "SAVED_COLOR";
-    private @ColorInt int initialColor = Color.BLUE;
+    private @ColorInt int initialColor = Color.GREEN;
 
     private ActionBar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_color_fragment);
+
+        setContentView(R.layout.activity_color_view);
 
         toolbar = getSupportActionBar();
         if (toolbar != null) {
@@ -39,16 +37,13 @@ public class FragmentColorActivity extends AppCompatActivity implements OnColorC
         if (savedInstanceState != null) {
             initialColor = savedInstanceState.getInt(SAVED_COLOR, initialColor);
         }
-        onColorChanged(initialColor);
 
-        if (null == savedInstanceState) {
-            ChromaColorFragment chromaColorFragment =
-                    ChromaColorFragment.newInstance(initialColor, ColorMode.ARGB, IndicatorMode.HEX);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.container_color_fragment, chromaColorFragment, TAG_COLOR_FRAGMENT)
-                    .commit();
-        }
+        ChromaColorView chromaColorView = findViewById(R.id.chroma_color_view);
+        chromaColorView.setOnColorChangedListener(this);
+        chromaColorView.setCurrentColor(initialColor);
+        // Set in layout chromaColorView.setIndicatorMode(IndicatorMode.DECIMAL);
+        // Set in layout chromaColorView.setColorMode(ColorMode.CMYK255);
+        onColorChanged(initialColor);
     }
 
     @Override

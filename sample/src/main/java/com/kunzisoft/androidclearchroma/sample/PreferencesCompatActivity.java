@@ -1,8 +1,8 @@
 package com.kunzisoft.androidclearchroma.sample;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.kunzisoft.androidclearchroma.ChromaPreferenceCompat;
@@ -58,6 +58,7 @@ public class PreferencesCompatActivity extends AppCompatActivity {
 
             //or add them manually
             ChromaPreferenceCompat pref = new ChromaPreferenceCompat(getContext());
+            pref.setIcon(R.drawable.palette);
             pref.setTitle("RGB(added from java)");
             pref.setSummary("Summary ...");
             pref.setColorMode(ColorMode.RGB);

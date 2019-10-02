@@ -2,16 +2,15 @@ package com.kunzisoft.androidclearchroma.sample;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.ColorInt;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -93,12 +92,21 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         });
 
         // Events for each button
-        findViewById(R.id.buttonOpenView).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_open_fragment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, FragmentColorActivity.class));
             }
         });
+
+        // Events for each button
+        findViewById(R.id.button_open_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ViewColorActivity.class));
+            }
+        });
+
 
         findViewById(R.id.prefsButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,16 +155,7 @@ public class MainActivity extends AppCompatActivity implements OnColorSelectedLi
         else {
             toolbar.setBackgroundDrawable(new ColorDrawable(newColor));
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(darkenColor(newColor));
-        }
-    }
-
-    private int darkenColor(int color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] *= 0.8f;
-        return Color.HSVToColor(hsv);
+        Utility.updatetatusBar(this, newColor);
     }
 
     @Override

@@ -1,4 +1,4 @@
-<android.support.v7.preference.PreferenceScreen
+<androidx.preference.PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -31,6 +31,7 @@
 
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="roundedquare"
+        android:icon="@drawable/palette"
         android:title="ARGB sample with rounded square sample"
         app:chromaShapePreview="ROUNDED_SQUARE"
         app:chromaColorMode="ARGB"
@@ -38,10 +39,11 @@
 
     <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
         android:key="customsummary"
+        android:icon="@drawable/palette"
         android:title="ARGB sample with square sample and custom summary"
         android:summary="Example summary"
         app:chromaShapePreview="SQUARE"
         app:chromaColorMode="ARGB"
         android:defaultValue="#ff0004"/>
 
-</android.support.v7.preference.PreferenceScreen>
+</androidx.preference.PreferenceScreen>

@@ -4,8 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/container_color_fragment"
+    <com.kunzisoft.androidclearchroma.view.ChromaColorView
+        xmlns:chroma="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/chroma_color_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        chroma:chromaColorMode="HSV"
+        chroma:chromaIndicatorMode="HEX" />
 </FrameLayout>

@@ -43,6 +43,26 @@ AndroidClearChroma uses AndroidX as compat library.
 
 ## Usage
 
+### ChromaColorView
+
+To display a color view in a layout
+``` xml
+    <com.kunzisoft.androidclearchroma.view.ChromaColorView
+        xmlns:chroma="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/chroma_color_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        chroma:chromaInitialColor="@color/colorAccent"
+        chroma:chromaColorMode="HSV"
+        chroma:chromaIndicatorMode="HEX" />
+```
+#### Attributes
+ * `chroma:chromaInitialColor` 	default color
+ * `chroma:chromaColorMode` 	RGB, ARGB, HSV, HSL, CMYK or CMYK255
+ * `chroma:chromaIndicatorMode`	HEX or DECIMAL
+
+See [ViewColorActivity.java](https://github.com/Kunzisoft/AndroidClearChroma/blob/master/sample/src/main/java/com/kunzisoft/androidclearchroma/sample/ViewColorActivity.java) for complete sample.
+
 ### ChromaDialog
 
 To display a color picker `DialogFragment` from your Activity:
@@ -63,87 +83,6 @@ new ChromaDialog.Builder()
     .indicatorMode(IndicatorMode.HEX) //HEX or DECIMAL; Note that (HSV || HSL || CMYK) && IndicatorMode.HEX is a bad idea
     .create()
     .show(getChildFragmentManager(), "ChromaDialog");
-```
-
-### Listeners
-
-Your parent Activity or Fragment must implement the listener interfaces.
-
-#### OnColorSelectedListener
-*OnColorSelectedListener* contains two methods : 
-`void onPositiveButtonClick(@ColorInt int color)`called when positiveButton is clicked and
-`void onNegativeButtonClick(@ColorInt int color)` called when negativeButton is clicked.
-
-#### OnColorChangedListener
-*OnColorChangedListener* contains method
- `void onColorChanged(@ColorInt int color)` called when color is changed in view.
- 
- See 
-[MainActivity.java](https://github.com/Kunzisoft/AndroidClearChroma/blob/master/sample/src/main/java/com/kunzisoft/androidclearchroma/sample/MainActivity.java)
-for complete sample of ChromaDialog
-
-## Style
-
-<img src="https://raw.githubusercontent.com/Kunzisoft/AndroidClearChroma/master/art/screen4.png" width="505">
-
-AndroidClearChroma uses the DialogFragment style of your app.
-
-### Preference
-
-You must add a `preferenceTheme` node in your activity :
-```
-<style name="AppTheme.Settings" parent="AppTheme">
-	<item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-</style>
-```
-or (for API < 14)
-```
-<style name="AppTheme.Settings" parent="AppTheme">
-	<item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
-</style>
-```
-
-<img src="https://raw.githubusercontent.com/Kunzisoft/AndroidClearChroma/master/art/screen3.png" width="250">
-
-**A.** Add Preference to your *.xml preference layout:
-``` xml
-    <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
-    	xmlns:chroma="http://schemas.android.com/apk/res-auto"
-        android:key="chroma_preference_key" 				// any key you want
-        android:title="HSV sample" 							// summary will be automatically fetched from the current color
-        android:summary="text and [color] string" 			// add [color] for show current color as string in summary
-        android:defaultValue="@color/colorAccent" 			// default color
-        chroma:chromaShapePreview="ROUNDED_SQUARE"			// CIRCLE, SQUARE, ROUNDED_SQUARE
-        chroma:chromaColorMode="HSV"						// RGB, ARGB, HSV, HSL, CMYK, CMYK255
-        chroma:chromaIndicatorMode="HEX" />					// HEX or DECIMAL 
-```
-
-**B.** Or you can add preferences dynamically from the code:
-```java
-    ChromaPreferenceCompat pref = new ChromaPreferenceCompat(getContext());
-    pref.setTitle("RGB(added from java)");
-    pref.setSummary("Summary ...");
-    pref.setColorMode(ColorMode.RGB);
-    pref.setIndicatorMode(IndicatorMode.HEX);
-    pref.setKey("any_key_you_need");
-    getPreferenceScreen().addPreference(pref);
-```
-
-Use `ChromaPreferenceFragmentCompat` as a superclass for managing fragments in Preferences.
-
-```
-public class ColorPreferenceFragmentCompat extends ChromaPreferenceFragmentCompat {
-
-        @Override
-        public void onCreatePreferences(Bundle bundle, String s) {
-            addPreferencesFromResource(R.xml.prefs); // load your ChromaPreferenceCompat prefs from xml
-        }
-    }
-```
-Then get the color from the preference.
-```
-SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-@ColorRes int color = preferences.getInt("chroma_preference_key", ContextCompat.getColor(context, R.color.colorPrimary));
 ```
 
 ### Fragment
@@ -177,9 +116,92 @@ Example :
     .replace(R.id.container_color_fragment, chromaColorFragment, TAG_COLOR_FRAGMENT)
     .commit();
 ```
-See 
-[FragmentColorActivity.java](https://github.com/Kunzisoft/AndroidClearChroma/blob/master/sample/src/main/java/com/kunzisoft/androidclearchroma/sample/FragmentColorActivity.java)
-for complete sample.
+See [FragmentColorActivity.java](https://github.com/Kunzisoft/AndroidClearChroma/blob/master/sample/src/main/java/com/kunzisoft/androidclearchroma/sample/FragmentColorActivity.java) for complete sample.
+
+### Listeners
+
+Your parent Activity or Fragment must implement the listener interfaces.
+
+#### OnColorSelectedListener
+*OnColorSelectedListener* contains two methods : 
+`void onPositiveButtonClick(@ColorInt int color)`called when positiveButton is clicked and
+`void onNegativeButtonClick(@ColorInt int color)` called when negativeButton is clicked.
+
+#### OnColorChangedListener
+*OnColorChangedListener* contains method
+ `void onColorChanged(@ColorInt int color)` called when color is changed in view.
+ 
+ See [MainActivity.java](https://github.com/Kunzisoft/AndroidClearChroma/blob/master/sample/src/main/java/com/kunzisoft/androidclearchroma/sample/MainActivity.java) for complete sample of ChromaDialog
+
+## Style
+
+<img src="https://raw.githubusercontent.com/Kunzisoft/AndroidClearChroma/master/art/screen4.png" width="505">
+
+AndroidClearChroma uses the DialogFragment style of your app.
+
+### Preference
+
+You must add a `preferenceTheme` node in your activity :
+```
+<style name="AppTheme.Settings" parent="AppTheme">
+	<item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+</style>
+```
+or (for API < 14)
+```
+<style name="AppTheme.Settings" parent="AppTheme">
+	<item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+</style>
+```
+
+<img src="https://raw.githubusercontent.com/Kunzisoft/AndroidClearChroma/master/art/screen3.png" width="250">
+
+**A.** Add Preference to your *.xml preference layout:
+``` xml
+    <com.kunzisoft.androidclearchroma.ChromaPreferenceCompat
+    	xmlns:chroma="http://schemas.android.com/apk/res-auto"
+        android:key="chroma_preference_key"
+        android:title="HSV sample"
+        android:summary="text and [color] string"
+        android:defaultValue="@color/colorAccent"
+        chroma:chromaShapePreview="ROUNDED_SQUARE"
+        chroma:chromaColorMode="HSV"
+        chroma:chromaIndicatorMode="HEX" />
+```
+#### Attributes
+ * Add [color] in `summary` to show current color as string
+ * `chroma:chromaInitialColor` 	default color
+ * `chroma:chromaColorMode` 	RGB, ARGB, HSV, HSL, CMYK or CMYK255
+ * `chroma:chromaIndicatorMode`	HEX or DECIMAL
+ * `chroma:chromaShapePreview` 	CIRCLE, SQUARE or ROUNDED_SQUARE
+
+**B.** Or you can add preferences dynamically from the code:
+```java
+    ChromaPreferenceCompat pref = new ChromaPreferenceCompat(getContext());
+    pref.setTitle("RGB(added from java)");
+    pref.setSummary("Summary ...");
+    pref.setColorMode(ColorMode.RGB);
+    pref.setIndicatorMode(IndicatorMode.HEX);
+    pref.setKey("any_key_you_need");
+    getPreferenceScreen().addPreference(pref);
+```
+
+Use `ChromaPreferenceFragmentCompat` as a superclass for managing fragments in Preferences.
+
+```
+public class ColorPreferenceFragmentCompat extends ChromaPreferenceFragmentCompat {
+
+        @Override
+        public void onCreatePreferences(Bundle bundle, String s) {
+            addPreferencesFromResource(R.xml.prefs); // load your ChromaPreferenceCompat prefs from xml
+        }
+    }
+```
+Then get the color from the preference.
+```
+SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+@ColorRes int color = preferences.getInt("chroma_preference_key", ContextCompat.getColor(context, R.color.colorPrimary));
+```
 
 ## Bonus
 Method for formatted output of a given color:
