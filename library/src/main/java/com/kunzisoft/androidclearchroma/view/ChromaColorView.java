@@ -1,6 +1,7 @@
 package com.kunzisoft.androidclearchroma.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -25,6 +27,10 @@ import com.kunzisoft.androidclearchroma.listener.OnColorChangedListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Chroma color view to show a color view with channels
+ * @author JJamet
+ */
 public class ChromaColorView extends RelativeLayout {
 
     private @ColorInt
@@ -38,26 +44,43 @@ public class ChromaColorView extends RelativeLayout {
 
     public ChromaColorView(Context context) {
         super(context);
-        init(context);
+        init(context, null);
     }
 
     public ChromaColorView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init(context, attrs);
     }
 
     public ChromaColorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init(context, attrs);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChromaColorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context);
+        init(context, attrs);
     }
 
-    private void init(Context context) {
+    private void init(Context context, @Nullable AttributeSet attributeSet) {
+
+        TypedArray a = getContext().obtainStyledAttributes(attributeSet, R.styleable.ChromaColorView);
+        try {
+            currentColor = a.getColor(R.styleable.ChromaPreference_chromaInitialColor, currentColor);
+
+            colorMode = ColorMode.values()[
+                    a.getInt(R.styleable.ChromaPreference_chromaColorMode,
+                            colorMode.ordinal())];
+
+            indicatorMode = IndicatorMode.values()[
+                    a.getInt(R.styleable.ChromaPreference_chromaIndicatorMode,
+                            indicatorMode.ordinal())];
+        }
+        finally {
+            a.recycle();
+        }
+
         View root = inflate(context, R.layout.chroma_color, this);
 
         colorView = root.findViewById(R.id.color_view);
@@ -121,8 +144,8 @@ public class ChromaColorView extends RelativeLayout {
 
     @Override
     public void invalidate() {
-        super.invalidate();
         createView();
+        super.invalidate();
     }
 
     public void setOnColorChangedListener(OnColorChangedListener listener) {

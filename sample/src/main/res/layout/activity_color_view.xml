@@ -5,7 +5,10 @@
     android:layout_height="match_parent">
 
     <com.kunzisoft.androidclearchroma.view.ChromaColorView
+        xmlns:chroma="http://schemas.android.com/apk/res-auto"
         android:id="@+id/chroma_color_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        chroma:chromaColorMode="HSV"
+        chroma:chromaIndicatorMode="HEX" />
 </FrameLayout>

@@ -10,14 +10,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kunzisoft.androidclearchroma.ChromaUtil;
-import com.kunzisoft.androidclearchroma.IndicatorMode;
-import com.kunzisoft.androidclearchroma.colormode.ColorMode;
-import com.kunzisoft.androidclearchroma.fragment.ChromaColorFragment;
 import com.kunzisoft.androidclearchroma.listener.OnColorChangedListener;
 import com.kunzisoft.androidclearchroma.view.ChromaColorView;
 
 /**
- * An activity that simply displays the color fragment.
+ * An activity that simply displays the color view.
  */
 public class ViewColorActivity extends AppCompatActivity implements OnColorChangedListener {
 
@@ -44,8 +41,8 @@ public class ViewColorActivity extends AppCompatActivity implements OnColorChang
         ChromaColorView chromaColorView = findViewById(R.id.chroma_color_view);
         chromaColorView.setOnColorChangedListener(this);
         chromaColorView.setCurrentColor(initialColor);
-        chromaColorView.setIndicatorMode(IndicatorMode.DECIMAL);
-        chromaColorView.setColorMode(ColorMode.CMYK255);
+        // Set in layout chromaColorView.setIndicatorMode(IndicatorMode.DECIMAL);
+        // Set in layout chromaColorView.setColorMode(ColorMode.CMYK255);
         onColorChanged(initialColor);
     }
 

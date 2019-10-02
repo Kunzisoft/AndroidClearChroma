@@ -19,11 +19,19 @@
         <enum name="ROUNDED_SQUARE" value="2"/>
     </attr>
 
+    <attr name="chromaInitialColor" format="reference|color"/>
+
     <declare-styleable name="ChromaPreference">
-        <attr name="chromaInitialColor" format="reference|color"/>
+        <attr name="chromaInitialColor"/>
         <attr name="chromaColorMode" />
         <attr name="chromaIndicatorMode" />
         <attr name="chromaShapePreview"/>
+    </declare-styleable>
+
+    <declare-styleable name="ChromaColorView">
+        <attr name="chromaInitialColor"/>
+        <attr name="chromaColorMode" />
+        <attr name="chromaIndicatorMode" />
     </declare-styleable>
 
 </resources>
