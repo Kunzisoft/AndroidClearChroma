@@ -3,8 +3,6 @@ package com.kunzisoft.androidclearchroma.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
@@ -17,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.kunzisoft.androidclearchroma.IndicatorMode;
 import com.kunzisoft.androidclearchroma.R;
@@ -39,6 +38,7 @@ public class ChromaColorView extends RelativeLayout {
     private IndicatorMode indicatorMode = IndicatorMode.DECIMAL;
 
     private AppCompatImageView colorView;
+    private List<ChannelView> channelViews = new ArrayList<>();
 
     private OnColorChangedListener mOnColorChangedListener;
 
@@ -87,15 +87,32 @@ public class ChromaColorView extends RelativeLayout {
         createView();
     }
 
+    private ChannelView.OnProgressChangedListener seekBarChangeListener = new ChannelView.OnProgressChangedListener() {
+        @Override
+        public void onProgressChanged() {
+            List<Channel> channels = new ArrayList<>();
+            for (ChannelView chan : channelViews) {
+                channels.add(chan.getChannel());
+            }
+            currentColor = colorMode.getColorMode().evaluateColor(channels);
+            // Listener for color selected in real time
+            if (mOnColorChangedListener != null)
+                mOnColorChangedListener.onColorChanged(currentColor);
+
+            // Change view for visibility of color
+            DrawableCompat.setTint(colorView.getDrawable(), currentColor);
+            colorView.invalidate();
+        }
+    };
+
     private void createView() {
-        Drawable colorViewDrawable = new ColorDrawable(currentColor);
-        colorView.setImageDrawable(colorViewDrawable);
+        DrawableCompat.setTint(colorView.getDrawable(), currentColor);
 
         ViewGroup channelContainer = findViewById(R.id.channel_container);
         channelContainer.removeAllViews();
 
         List<Channel> channels = colorMode.getColorMode().getChannels();
-        final List<ChannelView> channelViews = new ArrayList<>();
+        channelViews.clear();
         for (Channel channel : channels) {
             ChannelView channelView = new ChannelView(getContext());
 
@@ -112,33 +129,14 @@ public class ChromaColorView extends RelativeLayout {
             channelViews.add(channelView);
         }
 
-        ChannelView.OnProgressChangedListener seekBarChangeListener = new ChannelView.OnProgressChangedListener() {
-            @Override
-            public void onProgressChanged() {
-                List<Channel> channels = new ArrayList<>();
-                for (ChannelView chan : channelViews) {
-                    channels.add(chan.getChannel());
-                }
-                currentColor = colorMode.getColorMode().evaluateColor(channels);
-                // Listener for color selected in real time
-                if (mOnColorChangedListener != null)
-                    mOnColorChangedListener.onColorChanged(currentColor);
-
-                // Change view for visibility of color
-                Drawable colorViewDrawable = new ColorDrawable(currentColor);
-                colorView.setImageDrawable(colorViewDrawable);
-            }
-        };
-
-        for (ChannelView c : channelViews) {
-            channelContainer.addView(c);
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) c.getLayoutParams();
+        for (ChannelView currentChannelView : channelViews) {
+            currentChannelView.registerListener(seekBarChangeListener);
+            channelContainer.addView(currentChannelView);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) currentChannelView.getLayoutParams();
             params.topMargin =
                     getResources().getDimensionPixelSize(R.dimen.channel_view_margin_top);
             params.bottomMargin =
                     getResources().getDimensionPixelSize(R.dimen.channel_view_margin_bottom);
-
-            c.registerListener(seekBarChangeListener);
         }
     }
 
