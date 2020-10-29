@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:src="@android:color/black"
         android:background="@drawable/color_background"/>
 
     <ScrollView
