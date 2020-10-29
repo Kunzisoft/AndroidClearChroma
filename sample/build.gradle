@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
     applicationId "com.kunzisoft.androidclearchroma.sample"
         minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 2
-        versionName "1.1"
+        targetSdkVersion 30
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {
@@ -24,10 +24,9 @@ android {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.12'
     implementation project(':library')
 
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.preference:preference:1.1.0'
+    implementation 'androidx.preference:preference:1.1.1'
 }
