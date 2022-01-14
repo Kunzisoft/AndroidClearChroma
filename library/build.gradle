@@ -16,7 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
     lintOptions {
         abortOnError false
     }
@@ -31,8 +34,15 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.1.3"
 }
 
-ext {
-    PUBLISH_GROUP_ID = 'com.kunzisoft'
-    PUBLISH_ARTIFACT_ID = 'androidclearchroma'
-    PUBLISH_VERSION = '2.5'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.kunzisoft'
+                artifactId = 'androidclearchroma'
+                version = '2.5'
+            }
+        }
+    }
 }
