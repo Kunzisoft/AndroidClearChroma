@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 31
-        versionCode 25
-        versionName '2.5'
+        versionCode 26
+        versionName '2.6'
     }
     buildTypes {
         release {
@@ -41,7 +41,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.kunzisoft'
                 artifactId = 'androidclearchroma'
-                version = '2.5'
+                version = '2.6'
             }
         }
     }
