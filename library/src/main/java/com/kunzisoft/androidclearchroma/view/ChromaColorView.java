@@ -15,7 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.graphics.BlendModeColorFilterCompat;
+import androidx.core.graphics.BlendModeCompat;
 
 import com.kunzisoft.androidclearchroma.IndicatorMode;
 import com.kunzisoft.androidclearchroma.R;
@@ -100,13 +101,19 @@ public class ChromaColorView extends RelativeLayout {
                 mOnColorChangedListener.onColorChanged(currentColor);
 
             // Change view for visibility of color
-            DrawableCompat.setTint(colorView.getDrawable(), currentColor);
+            colorView.getDrawable().setColorFilter(
+                    BlendModeColorFilterCompat
+                            .createBlendModeColorFilterCompat(currentColor, BlendModeCompat.SRC_ATOP)
+            );
             colorView.invalidate();
         }
     };
 
     private void createView() {
-        DrawableCompat.setTint(colorView.getDrawable(), currentColor);
+        colorView.getDrawable().setColorFilter(
+                BlendModeColorFilterCompat
+                        .createBlendModeColorFilterCompat(currentColor, BlendModeCompat.SRC_ATOP)
+        );
 
         ViewGroup channelContainer = findViewById(R.id.channel_container);
         channelContainer.removeAllViews();

@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="@dimen/color_view_height"
-        android:src="@android:color/black"
-        android:background="@drawable/color_background"
+        android:src="@drawable/color_background"
+        android:scaleType="fitXY"
         android:layout_above="@+id/channel_container"
         android:layout_alignParentTop="true" />
 
